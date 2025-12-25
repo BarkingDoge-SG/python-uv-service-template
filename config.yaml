@@ -1,0 +1,24 @@
+logging:
+  log_dir: "./logs"
+  keeping_days: 15
+  log_level: "INFO"
+  log_name: "run"
+
+
+models:
+  bge_m3:
+    model_name: "BAAI/bge-m3"
+    class_name: "BGEM3FlagModel"
+    embedding_dim: 1024
+    config:
+      devices: "cuda"
+      use_fp16: true
+      device_map: "auto"
+
+  bge_reranker:
+    model_name: "BAAI/bge-reranker-v2-m3"
+    class_name: "FlagReranker"
+    config:
+      devices: "cuda"
+      use_fp16: true
+      device_map: "auto"
