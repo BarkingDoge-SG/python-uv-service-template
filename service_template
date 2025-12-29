@@ -7,7 +7,6 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/home/usr/data/Project
-Environment=PYTHONPATH=/home/usr/data/Project
 ExecStart=/usr/local/bin/uv run -m src.some_proj.api.server
 
 Restart=always                          # 异常退出自动重启
