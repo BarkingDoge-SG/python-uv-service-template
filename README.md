@@ -11,14 +11,14 @@
 ## 目录说明
 `data/`：用于存放项目运行过程中使用的数据（如模型文件、缓存数据等）。
 
-`lgos/`：日志输出目录，由 `utils/logger.py` 自动创建和维护，支持：
+`lgos/`：日志输出目录，由 `common_utils/logger.py` 自动创建和维护，支持：
 - 按天滚动。
 - 自动清理历史日志。
 - 自定义日志名。
 
 `wheels/`：用于存放 本地 wheel 包（如 `flash-attention2`，⚠️ 当前目录中的 wheel 文件为空文件，仅用于演示）。
 
-`utils/`：公共工具模块。
+`common_utils/`：公共工具模块。
 - `get_env.py`：负责加载 `.env` 文件中的环境变量（基于 `python-dotenv`）。
 - `conf_loader.py`：读取并解析 config.yaml，用于加载**日志、模型**等配置。
 - `logger.py`：对 logging 的封装，自动创建日志目录、按天滚动，可在 `config.yaml` 中配置日志级别 / 保存天数。
@@ -37,9 +37,9 @@ src/
 ```
 
 ## 配置文件说明
-- `.env`：用于设置环境变量（如 API Key、CUDA 设备等），可以直接通过 `from utils import get_env` 来确保 .env 被正确加载（huggingface 默认使用镜像）。
+- `.env`：用于设置环境变量（如 API Key、CUDA 设备等），可以直接通过 `from common_utils import get_env` 来确保 .env 被正确加载（huggingface 默认使用镜像）。
 - `.python-version`：默认 `3.12`。
-- `config.yaml` 集中管理项目配置，如日志配置、模型参数等。又 `utils.conf_loader.ConfigLoader` 统一读取。
+- `config.yaml` 集中管理项目配置，如日志配置、模型参数等。由 `common_utils.conf_loader.ConfigLoader` 统一读取。
 
 ## 依赖管理
 - 在 `pyproject.toml` 中定义了模板默认依赖

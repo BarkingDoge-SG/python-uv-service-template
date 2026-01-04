@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
 
-from utils.logger import Logger
+from common_utils.logger import Logger
 from src.some_proj.some_file import(
     some_func
 )
