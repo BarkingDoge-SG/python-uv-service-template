@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
@@ -8,6 +9,7 @@ from src.some_proj.some_file import(
 )
 
 LOGGER = Logger("some_proj_api").get_logger()
+logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
 
 
 class RequestItem(BaseModel):
