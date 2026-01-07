@@ -9,16 +9,21 @@ Type=simple
 WorkingDirectory=/home/usr/data/Project
 ExecStart=/usr/local/bin/uv run -m src.some_proj.api.server
 
+KillMode=control-group                  # stop 时终止该服务 cgroup 内所有进程（主进程+子进程）
+KillSignal=SIGTERM
+TimeoutStopSec=60                       # 停止最多等待 60 秒
+TimeoutStopFailureMode=kill
+SendSIGKILL=yes
+
 Restart=always                          # 异常退出自动重启
 RestartSec=2                            # 2 秒后重启
-SuccessExitStatus=0 SIGKILL SIGSEGV     #
-LimitNOFILE=65535:65535                 # 最大打开文件数
+SuccessExitStatus=0                     # SIGKILL SIGSEGV 不要当做正常退出信号，会掩盖真实故障
+
+LimitNOFILE=65535                       # 最大打开文件数
 LimitNPROC=4096                         # 最大进程数
 TimeoutStartSec=30                      # 启动最多等待 30 秒
-TimeoutStopSec=15                       # 停止最多等待 15 秒
-KillMode=process                        # 停止时只杀主进程，不杀子进程
 
-MemoryMax=15G                            # 内存硬限制
+MemoryMax=15G                           # 内存硬限制
 MemorySwapMax=0                         # 禁止使用 Swap
 StartLimitIntervalSec=0                 # 禁用重启次数限制
 
